@@ -1,0 +1,241 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+  thymeleaf:
+    prefix: classpath:templates/html/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false
+    
+  datasource:
+    hikari:
+       driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+#       jdbc-url: jdbc:log4jdbc:postgresql://10.1.22.2:5432/ANALYTICS_MANAGER?useUnicode=true&characterEncoding=utf-8
+       jdbc-url: jdbc:log4jdbc:postgresql://192.168.1.33:5432/ANALYTICS_MANAGER?useUnicode=true&characterEncoding=utf-8 #Test bed
+       #jdbc-url: jdbc:log4jdbc:postgresql://10.0.0.18:5432/ANALYTICS_MANAGER?useUnicode=true&characterEncoding=utf-8 #Real
+       username: postgres
+       password: pine1234!@#$
+       connection-test-query: SELECT 1
+  main:
+    allow-bean-definition-overriding: true
+# spring-boot-devtool    
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  application:
+    name: dh-analytics-manager
+
+# spring-boot-starter-actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+            
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+        
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8099
+
+
+openstacApi:
+    #osUrl: http://133.186.162.210
+    #osUrl: http://222.107.32.38
+    osUrl: http://192.168.1.101 #Test bed
+    #osUrl: http://192.168.1.5 #Real
+    #tokenPort: 35357
+    tokenPort: 5000 # Test bed
+    #tokenPort: 9090 # Real
+    tokenMethod: /v3/auth/tokens #Test bed
+    #tokenMethod: /cloudit/v5.0/iam/v1.0/tokens #Real
+    #projectPort: 5000    
+    projectPort: 5001
+    projectMethod: /v3/project
+    apiPort: 8774 # Test bed
+    #apiPort: 9090 #Real
+    #apiPort: 43080
+    apiMethod: /v2.1 # Test bed
+    #apiMethod: /cloudit/v5.0/ace/v1.0 # Real
+    #projectId: 456c62020a074255b13eaf0338e145e2
+    projectId: b25976ccd4e942a18c2d202ef397f353 #Test Bed
+    #projectId: tnt0003 #Real
+    #keyName: daumtest
+    keyName: pine #Test Bed
+    #availabilityZone: nova_com
+    availabilityZone: nova #Test Bed
+    diskConfig: AUTO
+    maxCount: 1
+    minCount: 1
+    #networks: b932ef28-de62-4d85-a9ef-ecb317f61210
+    networks: 18b7d6d3-9bb9-4d14-8520-122b9ba18218 #Test Bed
+    #networks: 18b7d6d3-9bb9-4d14-8520-122b9ba18218 #Real
+    #securityGroups: 1f53692d-71fd-48e8-a6fd-03270851cd3c
+    securityGroups: 89cffded-862b-48c2-953d-8c0ac43529ae #Test Bed
+    #securityGroups: d109e9d1-7ddf-449d-ac71-c68d66d823b3 #Real
+    snapshotPort: 9292 #Test bed
+    #snapshotPort: 9090 #Real
+    snapshotMethod: /v2/images #Test bed
+    #snapshotMethod: /cloudit/v5.0/ace/v1.0 #Real
+    tenantId: /tnt0003 #Real
+    templateId: 9032e7d7-d377-443f-9a66-6631f700f43a #Real
+    specId: 57a179e3-c32e-4312-ad8e-856b579ff204 #Real
+    hostName: anamanage #Real
+    subnetAddr: Default Network #Real
+    rootPassword: Pine1234!@#$Pine #Real
+    connUserId: pinecni341 #Real
+    connPassword: Pinecni341! #Real
+    
+
+openstacApiBatch:
+    imageRef: 48b1059a-3017-42e6-8440-51304bdd333e
+    flavorRef: 3 #m1.medium
+    keyName: daumtest
+    availabilityZone: nova_com
+    diskConfig: AUTO
+    maxCount: 1
+    minCount: 1
+    #networks: b932ef28-de62-4d85-a9ef-ecb317f61210
+    networks: 18b7d6d3-9bb9-4d14-8520-122b9ba18218 #Test Bed
+    #networks: 18b7d6d3-9bb9-4d14-8520-122b9ba18218 #Real
+    #securityGroups: 1f53692d-71fd-48e8-a6fd-03270851cd3c
+    securityGroups: 89cffded-862b-48c2-953d-8c0ac43529ae #Test Bed
+    #securityGroups: d109e9d1-7ddf-449d-ac71-c68d66d823b3 #Real
+
+sso:
+  dataHubUrl_pri: http://10.0.0.36:30000/ # Test bed
+  #dataHubUrl_pri: http://192.168.1.53:30000/ # Real
+  dataHubUrl_pub: http://13.125.189.233:30000/ # Test bed
+  #dataHubUrl_pub: http://121.139.196.198:30000/ # Real
+  dataHubUrl_pri_admin: http://10.0.0.36:30001/ # Test bed
+  #dataHubUrl_pri_admin: http://192.168.1.53:30001/ # Real
+  dataHubUrl_pub_admin: http://13.125.189.233:30001/ # Test bed
+  #dataHubUrl_pub_admin: http://121.139.196.198:30001/ # Real
+  responseType: code
+  authEndpoint: oauth2.0/authorize
+  tokenEndpoint: oauth2.0/token
+  publicKeyEndPoint: security/publickey
+  userMethod: security/users
+  logoutMethod: security/logout
+#  adminClientId: 4yEBKs1WcFvD1aVHbUwX
+#  adminClientSecret: AxeRFptAumqOJvLRNKV4d149gZBuPRYb
+  adminClientId: NqUa6hLq5rvwPRkqgQA7
+  adminClientSecret: PTJWTXn3EFQYcLkRYinAB5b1YlFFFICU
+  username: cityhub04
+  password: cityhub04!
+  redirectUri_pri: http://10.0.0.192:2020 #Test bet
+  #redirectUri_pri: http://192.168.1.53:2020 # Real
+  redirectUri_pub: http://13.125.90.2:2020 #Test bet
+  #redirectUri_pub: http://121.139.196.198:2020 # Real
+  redirectUri_admin: /admin/main
+  grantTypeAuth: authorization_code
+  grantTypeClient: client_credentials
+  grantTypePassword: password
+  grantTypeRefresh: refresh_token
+  isDevTest: true
+  devUserRole: Analytics_Admin
+  userId: skdisk2
+  userClientId: CwPHxXto4ROL93f9c76M
+  userClientSecret: Lryi7EWXMT6WBCUqmxcYoNvl8uIQ9boy
+
+ntm:
+# modelListUrl: http://133.186.162.108:7920
+  modelListUrl: http://192.168.1.217:7920 #Test Bed
+  #modelListUrl: http://192.168.1.32:7920 #Real
+  #urlPrefix: /dataservice/analysisApprovalRequests
+  urlPrefix: /dataservice/analysisApprovalRequests/users #Test Bed
+  #urlPrefix: /dataservice/analysisApprovalRequests #Real
+  urlPostfix: /dataModel
+  devTest: false
+  #devID: cityhub08
+  devID: pine #Test Bed
+  
+
+module:
+  #tempUrl: http://133.186.162.194
+  tempUrl: http://192.168.1.219 #Test Bed
+  #tempUrl: http://192.168.1.25 #Real
+  #port: 8000
+  port: 8000 #Test Bad
+  #port: 8000 #Real
+  method: /modules/analyticsModule
+  localFiles: /localFiles?path=/ANALYTICS_MANAGER_NFS&command=get_list
+  healthCheck: /healthCheck
+  asyncSecond: 5000
+  asyncPeriod: 360
+
+# zuul proxy 설정
+zuul:
+  routes:  
+    modules:
+      path: /modules/**
+      sensitiveHeaders:
+      serviceId: modules
+  #isLocalTest : false
+  isLocalTest : true #Test Bed
+  #localTestServer : 133.186.162.212
+  localTestServer : 192.168.1.187 #Test Bed
+  #contextPortMap : nifi:8080;analyticsModule:8000;hue:8888
+  contextPortMap : analyticsModule:8000 #Test Bed 
+  #contextSubpathMap : /modules/nifi:/modules/nifi;/modules/analyticsModule:/modules/analyticsModule;/modules/hue:/modules/hue
+  contextSubpathMap : /modules/analyticsModule:/modules/analyticsModule ##Test bed
+
+#zuul:
+#  isLocalTest : true
+#  localTestServer : 222.107.32.38 #Test Bed
+#  routes:    
+#    first:
+#      path: /modules/analyticsModule/**
+#      url: http://222.107.32.38:8000
+#    second:
+#      path: /modules/nifi/**
+#      url: http://192.168.1.216:8080/nifi
+#    third:
+#      path: /modules/hue/**
+#      url: http://192.168.1.216:8888/hue
+
+
+ribbon:
+  eureka:
+    enabled: false
+
+modules:
+  ribbon:
+    listOfServers: www.daumsoft.com
+
+nfs:
+  path: /ANALYTICS_MANAGER_NFS/batchServer/batchService_
+  resultPath: /ANALYTICS_MANAGER_NFS/NIFI_RESULT
+
+batchServer:
+  isDevTest: true
+  url: 
+
+cityHub:
+  url: http://133.186.162.110
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    enabled: false
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+     defaultZone: http://10.0.0.90:8888/eureka # Test bed
+     #defaultZone: http://192.168.1.46:7930/eureka, http://192.168.1.47:7931/eureka # Real
+#      defaultZone: http://133.186.162.81:8888/eureka, http://133.186.162.82:8888/eureka, http://133.186.162.83:8888/eureka
+
+
+
+
